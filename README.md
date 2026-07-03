@@ -14,7 +14,7 @@ works directly on GitHub Pages.
    git add .
    git commit -m "Add academic homepage"
    git branch -M main
-   git remote add origin https://github.com/<username>/<username>.github.io.git
+   git remote add origin https://github.com/pingpang584/pingpang584.github.io.git
    git push -u origin main
    ```
 4. In the repo: **Settings → Pages → Source: Deploy from a branch → `main` / root**.
