@@ -7,7 +7,7 @@ works directly on GitHub Pages.
 
 1. Create a repository named **`<your-github-username>.github.io`**.
 2. Copy the contents of this `site/` folder to the repository root
-   (so `index.html`, `files/`, and `images/` sit at the top level).
+   (so `index.html` and `images/` sit at the top level).
 3. Commit and push:
    ```bash
    git init
@@ -23,13 +23,10 @@ works directly on GitHub Pages.
 ## Editing
 
 - All content lives in `index.html` — edit text directly.
-- Papers/CV: `files/`   ·   Thumbnails & photo: `images/`
+- Thumbnails & profile photo: `images/`
+- Paper links point to external arXiv / IEEE pages (`.pub-links` blocks).
 
-## TODO (fill in before publishing)
+## TODO (optional)
 
-- [ ] Add profile photo as `images/profile.jpg` (square works best).
-- [ ] Add your **Google Scholar** URL (sidebar link, currently `#`).
-- [ ] Add your **GitHub** URL (sidebar link, currently `#`).
-- [ ] Add per-paper links (arXiv / code / project page / DOI) in the `.pub-links` blocks.
 - [ ] Confirm the ORION ECCV 2026 news date (currently "Jul 2026").
-- [ ] Optionally add project pages, a photo, or a "Selected Publications" split.
+- [ ] Optionally add project pages or a "Selected Publications" split.
