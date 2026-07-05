@@ -78,7 +78,7 @@ img{max-width:100%;height:auto;}
 /* ---------- Teaser ---------- */
 .teaser{margin:34px 0 8px;text-align:center;}
 .teaser img{max-width:90%;border:1px solid var(--border);border-radius:6px;}
-.caption{font-size:.9rem;color:var(--muted);margin:12px auto 0;max-width:var(--read);line-height:1.5;}
+.caption{font-size:.9rem;color:var(--muted);margin:12px auto 0;max-width:var(--read);line-height:1.5;text-align:left;}
 .caption b{color:var(--heading);}
 
 /* ---------- Sections ---------- */
@@ -284,9 +284,10 @@ footer a{color:var(--muted);}
 
     <div class="figure">
       <img src="../../images/ORION_realworld.png" alt="Real-world deployment trajectories across three environments">
-      <p class="caption"><b>Real-world deployment.</b> Goal-directed navigation across <b>(a) indoor</b>,
-      <b>(b) campus</b>, and <b>(c) field</b> environments; the red path is ORION reaching the goal from the
-      green start.</p>
+      <p class="caption"><b>Real-world deployment.</b> Goal-directed navigation from the start to the goal marker
+      across <b>(a) indoor</b>, <b>(b) campus</b>, and <b>(c) field</b> environments. Trajectories are color-coded:
+      <b style="color:#2e9e4f">ViNT (green)</b>, <b style="color:#2f5fd0">NoMaD (blue)</b>, and
+      <b style="color:#e0342a">ORION (red)</b>&nbsp;&mdash; only ORION reaches the goal across all three.</p>
     </div>
   </section>
 
