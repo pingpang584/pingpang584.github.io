@@ -114,24 +114,6 @@ h2.sec{
   padding:44px 20px;font-size:.9rem;
 }
 
-/* ---------- Results table ---------- */
-.table-wrap{max-width:720px;margin:0 auto 6px;overflow-x:auto;
-  border:1px solid var(--border);border-radius:6px;}
-table.rtable{border-collapse:collapse;width:100%;font-size:.86rem;min-width:560px;}
-.rtable th,.rtable td{padding:7px 12px;text-align:center;white-space:nowrap;}
-.rtable thead th{background:#f2f5f6;color:var(--heading);font-weight:700;
-  border-bottom:2px solid #dce4e7;}
-.rtable thead tr:first-child th{font-style:italic;font-weight:700;color:var(--muted);
-  font-size:.8rem;border-bottom:1px solid var(--border);}
-.rtable tbody td,.rtable tbody th{border-bottom:1px solid var(--border);font-weight:400;}
-.rtable .env,.rtable .route{font-weight:700;color:var(--heading);text-align:left;
-  vertical-align:middle;background:#fbfcfc;}
-.rtable .method{text-align:left;color:var(--heading);}
-.rtable .best{font-weight:700;color:var(--link-hover);}
-.rtable tr.ours td,.rtable tr.ours th{background:#f0f7f9;}
-.rtable .grp{border-top:2px solid #dce4e7;}
-.tnote{font-size:.82rem;color:var(--muted);text-align:center;margin:8px auto 0;max-width:720px;}
-
 /* ---------- BibTeX ---------- */
 .bibtex pre{
   background:#f7f8f9;border:1px solid var(--border);border-radius:6px;
@@ -157,7 +139,6 @@ footer a{color:var(--muted);}
   <!-- ---------- Hero ---------- -->
   <header class="hero">
     <h1>Ordinal Neural Collapse as a Representation<br>Prior for Visual Navigation</h1>
-    <p class="subtitle">A representation prior that aligns visual features with the ordinal geometry of navigation actions</p>
     <div class="venue">European Conference on Computer Vision (ECCV) 2026</div>
 
     <p class="authors">
@@ -172,26 +153,11 @@ footer a{color:var(--muted);}
       <a class="btn" href="https://arxiv.org/abs/2606.26839" target="_blank" rel="noopener">
         <span class="ic">&#128196;</span> Paper
       </a>
-      <a class="btn" href="https://arxiv.org/pdf/2606.26839" target="_blank" rel="noopener">
-        <span class="ic">&#11015;</span> arXiv PDF
-      </a>
       <!-- When the code is released, swap this for a real link:
       <a class="btn" href="https://github.com/USER/ORION" target="_blank" rel="noopener"><span class="ic">&#60;/&#62;</span> Code</a> -->
       <span class="btn disabled"><span class="ic">&#60;/&#62;</span> Code (coming soon)</span>
     </div>
-
-    <a class="back" href="../../index.html#publications">Back to homepage</a>
   </header>
-
-  <!-- ---------- Teaser ---------- -->
-  <div class="teaser">
-    <img src="../../images/ORION_ECCV2026.png" alt="ORION overview">
-    <p class="caption"><b>ORION overview.</b> Instead of leaving the visual encoder to learn action-agnostic
-    features from an indirect action loss, ORION explicitly organizes the representation space along the
-    <b>ordinal structure of ego-centric navigation actions</b>&nbsp;&mdash; from <i>Far Left</i> to
-    <i>Far Right</i>&nbsp;&mdash; producing a discriminative axis that yields more consistent actions at
-    ambiguous decision points.</p>
-  </div>
 
   <!-- ---------- Abstract ---------- -->
   <section>
@@ -275,47 +241,12 @@ footer a{color:var(--muted);}
       consistent actions.</p>
     </div>
 
-    <div class="table-wrap">
-      <table class="rtable">
-        <thead>
-          <tr>
-            <th colspan="3"></th>
-            <th colspan="3">Task Performance</th>
-            <th>Traj. Quality</th>
-          </tr>
-          <tr>
-            <th>Environment</th><th>Route</th><th>Method</th>
-            <th>SR (%) &uarr;</th><th>Prog. (%) &uarr;</th><th>Collision &darr;</th><th>H-Jerk (med.) &darr;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Indoor -->
-          <tr class="grp"><td class="env" rowspan="8">Indoor<br>(2D-3D-S)</td><td class="route" rowspan="4">Basic</td><td class="method">ViNT</td><td>76</td><td>74.58</td><td>0.24</td><td>4.12</td></tr>
-          <tr><td class="method">NoMaD</td><td>92</td><td>95.17</td><td>0.02</td><td>4.61</td></tr>
-          <tr><td class="method">NC-ETF</td><td>86</td><td>89.32</td><td>0.14</td><td>4.33</td></tr>
-          <tr class="ours"><td class="method">ORION</td><td class="best">96</td><td class="best">96.68</td><td>0.04</td><td class="best">1.58</td></tr>
-
-          <tr class="grp"><td class="route" rowspan="4">Intersection</td><td class="method">ViNT</td><td>0</td><td>36.12</td><td>1.00</td><td>4.99</td></tr>
-          <tr><td class="method">NoMaD</td><td>17</td><td>32.07</td><td>0.81</td><td>15.48</td></tr>
-          <tr><td class="method">NC-ETF</td><td>12</td><td>25.48</td><td>0.88</td><td>12.13</td></tr>
-          <tr class="ours"><td class="method">ORION</td><td class="best">91</td><td class="best">93.82</td><td class="best">0.09</td><td class="best">4.99</td></tr>
-
-          <!-- Outdoor -->
-          <tr class="grp"><td class="env" rowspan="8">Outdoor<br>(Citysim)</td><td class="route" rowspan="4">Basic</td><td class="method">ViNT</td><td>45</td><td>73.58</td><td>1.48</td><td>1.22</td></tr>
-          <tr><td class="method">NoMaD</td><td>88</td><td>89.85</td><td>0.12</td><td>5.08</td></tr>
-          <tr><td class="method">NC-ETF</td><td>89</td><td>91.18</td><td>0.21</td><td>2.38</td></tr>
-          <tr class="ours"><td class="method">ORION</td><td class="best">94</td><td class="best">94.68</td><td class="best">0.06</td><td class="best">1.09</td></tr>
-
-          <tr class="grp"><td class="route" rowspan="4">Multi<br>Intersection</td><td class="method">ViNT</td><td>16</td><td>44.24</td><td>2.16</td><td class="best">2.34</td></tr>
-          <tr><td class="method">NoMaD</td><td>48</td><td>70.30</td><td>1.80</td><td>34.49</td></tr>
-          <tr><td class="method">NC-ETF</td><td>40</td><td>68.57</td><td>1.39</td><td>11.98</td></tr>
-          <tr class="ours"><td class="method">ORION</td><td class="best">74</td><td class="best">86.39</td><td class="best">0.45</td><td>10.13</td></tr>
-        </tbody>
-      </table>
+    <div class="figure">
+      <img src="../../images/ORION_table.png" alt="Navigation performance table"
+           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22720%22 height=%22200%22><rect width=%22720%22 height=%22200%22 fill=%22%23fafbfb%22 stroke=%22%23cfd6da%22 stroke-dasharray=%224%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22Lato,Arial%22 font-size=%2216%22 fill=%22%239aa6ad%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>Add images/ORION_table.png</text></svg>';">
+      <p class="caption"><b>Table 1.</b> Navigation performance in simulated environments (Indoor 2D-3D-S,
+      Outdoor Gazebo Citysim). Best result per route in bold.</p>
     </div>
-    <p class="tnote"><b>Table 1.</b> Navigation performance in simulated environments (Indoor 2D-3D-S,
-    Outdoor Gazebo Citysim). Best result per route in <span class="best">bold</span>; ORION rows shaded.
-    SR&nbsp;=&nbsp;success rate, Prog.&nbsp;=&nbsp;goal progress, H-Jerk&nbsp;=&nbsp;heading jerk.</p>
 
     <div class="figure">
       <img src="../../images/ORION_seq_sim_real.png" alt="Qualitative comparison of NoMaD and ORION over time">
@@ -336,11 +267,11 @@ footer a{color:var(--muted);}
   <!-- ---------- BibTeX ---------- -->
   <section class="bibtex">
     <h2 class="sec">BibTeX</h2>
-<pre>@inproceedings{son2026orion,
-  title     = {Ordinal Neural Collapse as a Representation Prior for Visual Navigation},
-  author    = {Son, E-In and Kim, Jung-Taak and Seo, Seung-Woo},
-  booktitle = {European Conference on Computer Vision (ECCV)},
-  year      = {2026}
+<pre>@article{son2026ordinal,
+  title={Ordinal Neural Collapse as a Representation Prior for Visual Navigation},
+  author={Son, E-In and Kim, Jung-Taak and Seo, Seung-Woo},
+  journal={arXiv preprint arXiv:2606.26839},
+  year={2026}
 }</pre>
   </section>
 
