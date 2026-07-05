@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAO: Traversability-Aware Adaptive Optimization for Path Planning and Control in Mountainous Terrain</title>
+<meta name="description" content="TAO (Traversability-aware Adaptive Optimization) — separating apparent and relative traversability for resilient path planning and control in mountainous terrain. IEEE RA-L 2024.">
+
+<!-- Social preview -->
+<meta property="og:title" content="TAO: Traversability-Aware Adaptive Optimization for Path Planning and Control in Mountainous Terrain">
+<meta property="og:description" content="Separating apparent and relative traversability for resilient robot navigation in extreme mountainous terrain. IEEE RA-L 2024.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../../images/TAO_RAL2024.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --link:#2f7d95;
+  --link-hover:#1c5568;
+  --text:#494e52;
+  --heading:#333;
+  --muted:#7a8288;
+  --border:#eceeef;
+  --accent-bar:#2f7d95;
+  --btn:#2b2f33;
+  --btn-hover:#12181c;
+  --max:1000px;
+  --read:880px;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;font-family:'Lato',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-weight:400;color:var(--text);line-height:1.65;font-size:16px;background:#fff;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--link);text-decoration:none;}
+a:hover{color:var(--link-hover);text-decoration:underline;}
+img{max-width:100%;height:auto;}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px;}
+
+/* ---------- Header ---------- */
+.hero{text-align:center;padding:60px 0 10px;}
+.hero h1{
+  font-size:2.7rem;font-weight:900;color:#1b1e21;line-height:1.14;
+  margin:0 0 14px;letter-spacing:-1px;
+}
+.venue{
+  font-size:1.2rem;font-weight:900;color:#1b1e21;letter-spacing:-.2px;
+  margin:0 0 16px;
+}
+
+/* Authors */
+.authors{font-size:1.12rem;color:var(--heading);margin:0 0 5px;line-height:1.7;font-weight:400;}
+.authors a,.authors .name{color:var(--link);font-weight:400;}
+.authors sup{font-size:.7em;font-weight:400;}
+.affil{font-size:1rem;color:var(--heading);margin:0 0 4px;}
+.affil sup{color:var(--link);font-weight:700;}
+.notes{font-size:.9rem;color:var(--muted);margin:4px 0 0;}
+
+/* Action buttons — dark rounded pills */
+.links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:26px 0 10px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--btn);color:#fff;font-weight:700;font-size:.95rem;
+  padding:9px 20px;border-radius:26px;border:1px solid var(--btn);
+  transition:background .15s,border-color .15s;
+}
+.btn:hover{background:var(--btn-hover);border-color:var(--btn-hover);color:#fff;text-decoration:none;}
+.btn .ic{font-size:1.05rem;line-height:1;}
+.btn.disabled{
+  background:#eef1f2;color:var(--muted);border-color:#e0e5e8;cursor:not-allowed;
+}
+.btn.disabled:hover{background:#eef1f2;color:var(--muted);border-color:#e0e5e8;}
+
+/* ---------- Teaser ---------- */
+.teaser{margin:34px 0 8px;text-align:center;}
+.teaser img{max-width:90%;border:1px solid var(--border);border-radius:6px;}
+.caption{font-size:.9rem;color:var(--muted);margin:12px auto 0;max-width:var(--read);line-height:1.5;text-align:left;}
+.caption b{color:var(--heading);}
+
+/* ---------- Sections ---------- */
+section{padding:26px 0;border-top:1px solid var(--border);}
+section:first-of-type{border-top:0;}
+h2.sec{
+  font-size:1.5rem;font-weight:700;color:var(--heading);text-align:center;
+  margin:0 0 18px;
+}
+.prose{max-width:var(--read);margin:0 auto;}
+.prose p{margin:0 0 14px;}
+.prose p:last-child{margin-bottom:0;}
+.hl{color:var(--heading);font-weight:700;}
+
+/* Results subsection heading */
+h3.sub{font-size:1.15rem;font-weight:700;color:var(--heading);text-align:center;
+  margin:30px auto 2px;}
+
+/* TL;DR box */
+.tldr{max-width:var(--read);margin:30px auto 0;padding:16px 22px;
+  background:#f0f7f9;border-left:4px solid var(--accent-bar);border-radius:6px;
+  font-size:1.04rem;color:var(--heading);line-height:1.55;}
+.tldr b{font-weight:900;letter-spacing:.2px;margin-right:4px;}
+
+/* Contribution list */
+.contrib{max-width:var(--read);margin:14px auto 0;padding:0;list-style:none;}
+.contrib li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dashed var(--border);}
+.contrib li:last-child{border-bottom:0;}
+.contrib li::before{
+  content:"";position:absolute;left:6px;top:16px;width:8px;height:8px;
+  border-radius:50%;background:var(--accent-bar);
+}
+
+/* Figure blocks */
+.figure{margin:22px auto;text-align:center;max-width:var(--read);}
+.figure img{border:1px solid var(--border);border-radius:6px;}
+
+/* ---------- BibTeX ---------- */
+.bibtex pre{
+  background:#f7f8f9;border:1px solid var(--border);border-radius:6px;
+  padding:18px 20px;overflow-x:auto;font-size:.85rem;line-height:1.5;
+  font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
+  color:var(--heading);max-width:var(--read);margin:0 auto;
+}
+
+footer{border-top:1px solid var(--border);text-align:center;color:var(--muted);
+  font-size:.8rem;padding:26px 20px 44px;}
+footer a{color:var(--muted);}
+
+@media (max-width:640px){
+  .hero h1{font-size:1.7rem;letter-spacing:-.5px;}
+  .venue{font-size:1.05rem;}
+  .hero{padding:40px 0 4px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ---------- Hero ---------- -->
+  <header class="hero">
+    <h1>Traversability-Aware Adaptive Optimization for<br>Path Planning and Control in Mountainous Terrain</h1>
+    <div class="venue">IEEE RA-L 2024</div>
+
+    <p class="authors">
+      <span class="name">Se-Wook Yoo</span><sup>*</sup>,
+      <span class="name">E-In Son</span><sup>*</sup>,
+      <span class="name">Seung-Woo Seo</span><sup>&dagger;</sup>
+    </p>
+    <p class="affil">Seoul National University</p>
+    <p class="notes"><sup>*</sup>Equal contribution &nbsp;&middot;&nbsp; <sup>&dagger;</sup>Corresponding author</p>
+
+    <div class="links">
+      <a class="btn" href="https://arxiv.org/abs/2404.03274" target="_blank" rel="noopener">
+        <span class="ic">&#128196;</span> Paper
+      </a>
+      <a class="btn" href="https://doi.org/10.1109/LRA.2024.3387042" target="_blank" rel="noopener">
+        <span class="ic">&#128279;</span> IEEE Xplore
+      </a>
+    </div>
+  </header>
+
+  <!-- ---------- TL;DR ---------- -->
+  <p class="tldr"><b>TL;DR</b> TAO separates traversability into an <i>apparent</i> component (how hard the
+  terrain looks) and a <i>relative</i> component (how hard it is given the robot's own speed and torque),
+  and injects both into sampling-based path planning and motion predictive control&nbsp;&mdash; letting a
+  robot move resiliently through extreme mountainous terrain without getting stuck.</p>
+
+  <!-- ---------- Teaser ---------- -->
+  <div class="teaser" id="top-figure">
+    <img src="../../images/TAO_RAL2024.png" alt="Robot navigating mountainous terrain with traversability-aware optimal path">
+    <p class="caption"><b>Robot navigation in mountainous terrain.</b> TAO is a traversability-aware navigation
+    framework validated in both virtual and real environments; virtual scenes are reconstructed from actual
+    mountainous terrain. The overlay (cyan) shows the optimal path computed using traversability information.</p>
+  </div>
+
+  <!-- ---------- Abstract ---------- -->
+  <section>
+    <h2 class="sec">Abstract</h2>
+    <div class="prose">
+      <p>Autonomous navigation in extreme mountainous terrains poses challenges due to the presence of
+      mobility-stressing elements and undulating surfaces, making it particularly difficult compared to
+      conventional off-road driving scenarios. In such environments, estimating traversability solely based on
+      exteroceptive sensors often leads to the inability to reach the goal due to a high prevalence of
+      non-traversable areas. In this letter, we consider traversability as a <span class="hl">relative value</span>
+      that integrates the robot's internal state, such as speed and torque, to exhibit resilient behavior to reach
+      its goal successfully.</p>
+
+      <p>We separate traversability into <span class="hl">apparent traversability</span> and
+      <span class="hl">relative traversability</span>, then incorporate these distinctions in the optimization
+      process of sampling-based path planning and motion predictive control. Our method enables the robots to
+      execute the desired behaviors more accurately while avoiding hazardous regions and getting stuck. Experiments
+      conducted on simulation with <span class="hl">27 diverse types of mountainous terrain</span> and real-world
+      demonstrate the robustness of the proposed framework, with increasingly better performance observed in more
+      complex environments.</p>
+    </div>
+  </section>
+
+  <!-- ---------- Key ideas ---------- -->
+  <section>
+    <h2 class="sec">Key Ideas</h2>
+    <ul class="contrib">
+      <li><b>Traversability as a relative value.</b> Beyond how the terrain looks, TAO treats traversability as
+      relative to the robot's internal state (speed, torque)&nbsp;&mdash; a slope that is impassable at low speed
+      may be traversable with enough momentum, and vice versa.</li>
+      <li><b>Apparent vs. relative traversability.</b> TAO decomposes traversability into an
+      <i>apparent</i> component from exteroceptive sensing and a <i>relative</i> component from proprioceptive
+      state, so planning and control can reason about both terrain difficulty and the robot's current capability.</li>
+      <li><b>Traversability-aware optimization.</b> Both components are folded into the cost of
+      <span class="hl">sampling-based path planning</span> and <span class="hl">motion predictive control</span>,
+      biasing behavior toward safe, achievable motions while adapting velocity in risky regions.</li>
+      <li><b>Robust as terrain gets harder.</b> Validated on 27 simulated mountainous terrains and in the real
+      world, with the performance gap over baselines <i>growing</i> as environments become more complex.</li>
+    </ul>
+  </section>
+
+  <!-- ---------- Method ---------- -->
+  <section>
+    <h2 class="sec">Method</h2>
+    <div class="prose">
+      <p>TAO estimates <span class="hl">apparent traversability</span> from exteroceptive terrain perception and
+      <span class="hl">relative traversability</span> from the robot's proprioceptive state, where the internal
+      speed and torque act as a tracking coefficient that dynamically adjusts how aggressively the robot should
+      move. Rather than assigning a fixed speed profile to a discrete terrain class, this keeps the cost continuous
+      and motion-aware.</p>
+      <p>Both traversability terms are incorporated into the optimization of a sampling-based path planner and a
+      motion predictive controller, together with constraints that prevent the robot from overlooking potential
+      risk in hazardous terrain. The result is a planner-controller stack that follows desired behaviors accurately
+      while avoiding regions where the robot would stall or get stuck.</p>
+    </div>
+
+    <div class="figure">
+      <img src="../../images/TAO_overall_structure.png" alt="TAO framework overview">
+      <p class="caption"><b>TAO framework.</b> From real-world terrain, <b>exteroceptive</b> sensing (height and
+      normal maps) produces <i>apparent traversability</i> and hard constraints, while the robot's
+      <b>proprioceptive</b> state (inertial state and localization) produces <i>relative traversability</i>. Both
+      feed <b>planning &amp; control</b> &mdash; traversability-aware path optimization and adaptive control
+      optimization &mdash; to drive the robot toward the goal.</p>
+    </div>
+  </section>
+
+  <!-- ---------- Results ---------- -->
+  <section>
+    <h2 class="sec">Results</h2>
+    <div class="prose">
+      <p>TAO is evaluated in simulation across <span class="hl">27 diverse mountainous terrains</span> reconstructed
+      from real landscapes, and deployed on a physical robot in real mountainous environments. Across settings TAO
+      reaches goals more reliably and avoids getting stuck, and the improvement over baselines
+      <span class="hl">grows as the terrain becomes more complex</span>.</p>
+    </div>
+
+    <h3 class="sub">Simulation</h3>
+    <div class="prose">
+      <p>Against terrain-mapping and planning baselines (DEM, PUTN, and a traversability-map-only variant), adding
+      TAO's planning (<i>TAO-Plan</i>) and adaptive control (<i>TAO-Ctr</i>) improves
+      <span class="hl">success rate</span> and <span class="hl">goal progress</span> while reducing path steps.
+      The margin is small on <i>Easy</i> terrain but widens sharply on <i>Hard</i> terrain, where naive controllers
+      frequently stall.</p>
+    </div>
+
+    <div class="figure">
+      <img src="../../images/TAO_table.png" alt="TAO simulation results table">
+      <p class="caption"><b>Table 1.</b> Simulation results by difficulty (<i>Easy / Plain / Hard</i>) across
+      planning baselines (DEM, PUTN, &#8499;<sub>&tau;</sub>-only, TAO-Plan), each combined with vanilla vs.
+      <i>TAO-Ctr</i> control under MPC and MPPI. Best per row in <b>bold</b>, second best underlined.</p>
+    </div>
+
+    <div class="figure">
+      <img src="../../images/TAO_trajectories.png" alt="Simulated trajectories on reconstructed mountainous terrain">
+      <p class="caption"><b>Simulated rollouts on reconstructed terrain.</b> <b>(a)&ndash;(d)</b> trajectories on
+      3D terrains reconstructed from real mountainous landscapes; TAO follows safer, more consistent paths to the
+      goal (pin) across steep, rugged surfaces.</p>
+    </div>
+
+    <h3 class="sub">Real-world</h3>
+    <div class="prose">
+      <p>Deployed on a physical robot in real mountainous terrain, TAO reliably reaches the goal, while the PUTN
+      baseline repeatedly gets stuck short of it.</p>
+    </div>
+
+    <div class="figure">
+      <img src="../../images/TAO_real_world_navigation.png" alt="Real-world navigation trajectories: PUTN vs TAO">
+      <p class="caption"><b>Real-world navigation.</b> From <b>Start</b> to <b>Goal</b> in real mountainous terrain,
+      three runs each of <b style="color:#3b4ccc">PUTN (blue)</b> and <b style="color:#e0342a">TAO (red)</b>. TAO
+      consistently finds a traversable route to the goal, whereas PUTN stalls near the start.</p>
+    </div>
+  </section>
+
+  <!-- ---------- BibTeX ---------- -->
+  <section class="bibtex">
+    <h2 class="sec">BibTeX</h2>
+<pre>@article{yoo2024traversability,
+  title={Traversability-Aware Adaptive Optimization for Path Planning and Control in Mountainous Terrain},
+  author={Yoo, Se-Wook and Son, E-In and Seo, Seung-Woo},
+  journal={IEEE Robotics and Automation Letters},
+  volume={9},
+  number={6},
+  pages={5078--5085},
+  year={2024},
+  publisher={IEEE}
+}</pre>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2026 E-In Son &nbsp;&middot;&nbsp;
+  <a href="../../index.html">Homepage</a> &nbsp;&middot;&nbsp;
+  Page template adapted from the
+  <a href="https://nerfies.github.io/" target="_blank" rel="noopener">Nerfies</a> academic project page style.
+</footer>
+
+</body>
+</html>
