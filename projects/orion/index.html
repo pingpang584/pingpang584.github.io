@@ -93,6 +93,16 @@ h2.sec{
 .prose p:last-child{margin-bottom:0;}
 .hl{color:var(--heading);font-weight:700;}
 
+/* Results subsection heading */
+h3.sub{font-size:1.15rem;font-weight:700;color:var(--heading);text-align:center;
+  margin:30px auto 2px;}
+
+/* TL;DR box */
+.tldr{max-width:var(--read);margin:30px auto 0;padding:16px 22px;
+  background:#f0f7f9;border-left:4px solid var(--accent-bar);border-radius:6px;
+  font-size:1.04rem;color:var(--heading);line-height:1.55;}
+.tldr b{font-weight:900;letter-spacing:.2px;margin-right:4px;}
+
 /* Contribution list */
 .contrib{max-width:var(--read);margin:14px auto 0;padding:0;list-style:none;}
 .contrib li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dashed var(--border);}
@@ -158,8 +168,14 @@ footer a{color:var(--muted);}
     </div>
   </header>
 
+  <!-- ---------- TL;DR ---------- -->
+  <p class="tldr"><b>TL;DR</b> ORION structures the visual encoder's feature space along the
+  ordinal axis of ego-centric navigation actions (<i>Far Left</i>&nbsp;&rarr;&nbsp;<i>Far Right</i>),
+  giving a diffusion navigation policy that acts far more consistently at ambiguous decision points
+  such as multi-way intersections.</p>
+
   <!-- ---------- Teaser ---------- -->
-  <div class="teaser">
+  <div class="teaser" id="top-figure">
     <img src="../../images/ORION_pipeline.png" alt="ORION two-stage pipeline">
     <p class="caption"><b>ORION.</b> <b>Stage&nbsp;1:</b> the vision encoder is pretrained with an
     <i>ordinal neural collapse</i> objective that arranges action classes from <i>Far Left</i> to
@@ -215,17 +231,16 @@ footer a{color:var(--muted);}
     </ul>
   </section>
 
-  <!-- ---------- Method (add figure when available) ---------- -->
+  <!-- ---------- Method ---------- -->
   <section>
     <h2 class="sec">Method</h2>
     <div class="prose">
-      <p>ORION pretrains the visual encoder with an <span class="hl">ordinal neural collapse</span> objective that
-      arranges the per-class feature means as equally spaced points along one axis, ordered by the navigation
-      action they correspond to. Within-class features collapse toward their class mean, and off-axis variance
-      is penalized, so the geometry of the representation space directly mirrors the geometry of the action space.</p>
-      <p>The resulting encoder is integrated into a diffusion-based navigation policy and the full system is
-      fine-tuned end-to-end, preserving the ordinal prior while adapting features to the downstream controller.
-      The full two-stage pipeline is illustrated in the figure at the top of this page.</p>
+      <p>The <span class="hl">ordinal neural collapse</span> objective arranges the per-class feature means as
+      equally spaced points along a single axis, ordered by the navigation action they correspond to, while
+      collapsing within-class features toward their mean. The geometry of the representation space is thereby
+      forced to mirror the geometry of the action space. The pretrained encoder is then integrated into a
+      diffusion navigation policy and fine-tuned end-to-end &mdash; see the
+      <a href="#top-figure">two-stage pipeline</a> above.</p>
     </div>
   </section>
 
@@ -235,18 +250,7 @@ footer a{color:var(--muted);}
     <div class="prose">
       <p>Across simulation and real-world benchmarks, ORION improves <span class="hl">navigation success rate</span>
       and <span class="hl">goal progress</span> over both end-to-end imitation learning (ViNT, NoMaD) and a
-      neural-collapse baseline (NC-ETF). The gains are largest in visually challenging, ambiguous scenes: on the
-      Citysim <i>Multi-Intersection</i> route ORION reaches <span class="hl">74%</span> success versus 48% for
-      NoMaD, and on the Indoor <i>Intersection</i> route it jumps from 17% to <span class="hl">91%</span> &mdash;
-      while cutting heading jerk by <span class="hl">71%</span> at intersections, reflecting far more temporally
-      consistent actions.</p>
-    </div>
-
-    <div class="figure">
-      <img src="../../images/ORION_table.png" alt="Navigation performance table"
-           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22720%22 height=%22200%22><rect width=%22720%22 height=%22200%22 fill=%22%23fafbfb%22 stroke=%22%23cfd6da%22 stroke-dasharray=%224%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22Lato,Arial%22 font-size=%2216%22 fill=%22%239aa6ad%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>Add images/ORION_table.png</text></svg>';">
-      <p class="caption"><b>Table 1.</b> Navigation performance in simulated environments (Indoor 2D-3D-S,
-      Outdoor Gazebo Citysim). Best result per route in bold.</p>
+      neural-collapse baseline (NC-ETF), with the largest gains in visually challenging, ambiguous scenes.</p>
     </div>
 
     <div class="figure">
@@ -257,11 +261,32 @@ footer a{color:var(--muted);}
       <b>(a) simulation</b> and <b>(b) real-world</b> settings.</p>
     </div>
 
+    <h3 class="sub">Simulation</h3>
+    <div class="prose">
+      <p>On the Citysim <i>Multi-Intersection</i> route ORION reaches <span class="hl">74%</span> success versus
+      48% for NoMaD, and on the Indoor <i>Intersection</i> route it jumps from 17% to <span class="hl">91%</span>
+      &mdash; while cutting heading jerk by <span class="hl">71%</span> at intersections, reflecting far more
+      temporally consistent actions.</p>
+    </div>
+
+    <div class="figure">
+      <img src="../../images/ORION_table.png" alt="Navigation performance table"
+           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22720%22 height=%22200%22><rect width=%22720%22 height=%22200%22 fill=%22%23fafbfb%22 stroke=%22%23cfd6da%22 stroke-dasharray=%224%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22Lato,Arial%22 font-size=%2216%22 fill=%22%239aa6ad%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>Add images/ORION_table.png</text></svg>';">
+      <p class="caption"><b>Table 1.</b> Navigation performance in simulated environments (Indoor 2D-3D-S,
+      Outdoor Gazebo Citysim). Best result per route in bold.</p>
+    </div>
+
+    <h3 class="sub">Real-world</h3>
+    <div class="prose">
+      <p>Deployed on a Clearpath Husky with onboard inference, ORION performs goal-directed navigation across
+      three unseen real-world environments with varied scene structure and visual distractors.</p>
+    </div>
+
     <div class="figure">
       <img src="../../images/ORION_realworld.png" alt="Real-world deployment trajectories across three environments">
       <p class="caption"><b>Real-world deployment.</b> Goal-directed navigation across <b>(a) indoor</b>,
       <b>(b) campus</b>, and <b>(c) field</b> environments; the red path is ORION reaching the goal from the
-      green start under varied scene structure and visual distractors.</p>
+      green start.</p>
     </div>
   </section>
 
