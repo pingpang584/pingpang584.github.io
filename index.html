@@ -102,6 +102,22 @@ h2.sec::after{content:"";position:absolute;left:0;bottom:-2px;width:52px;height:
 }
 .pub-links a:hover{background:var(--link);color:#fff;text-decoration:none;border-color:var(--link);}
 
+/* Projects */
+.proj{display:grid;grid-template-columns:220px 1fr;gap:22px;padding:18px 0;border-bottom:1px solid var(--border);}
+.proj:last-child{border-bottom:0;}
+.proj-thumb{width:220px;border:1px solid var(--border);border-radius:4px;overflow:hidden;
+  background:#fafbfb;aspect-ratio:16/9;position:relative;cursor:pointer;}
+.proj-thumb video{width:100%;height:100%;object-fit:cover;display:block;}
+.proj-thumb::after{content:"▶ hover to play";position:absolute;left:6px;bottom:6px;
+  background:rgba(0,0,0,.55);color:#fff;font-size:.68rem;padding:2px 7px;border-radius:3px;
+  transition:opacity .2s;pointer-events:none;}
+.proj-thumb:hover::after{opacity:0;}
+.proj-title{font-weight:700;color:var(--heading);font-size:1.02rem;margin:0 0 4px;line-height:1.35;}
+.proj-funder{font-size:.88rem;color:var(--muted);font-style:italic;margin:0 0 7px;}
+.proj-roles{font-size:.9rem;margin:0 0 8px;color:var(--text);}
+.proj-roles .yr{color:var(--muted);}
+.proj-desc{font-size:.95rem;margin:0;}
+
 /* Generic lists */
 .entry{padding:12px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:12px;}
 .entry:last-child{border-bottom:0;}
@@ -121,6 +137,8 @@ footer a{color:var(--muted);}
   .site-nav{display:none;}
   .pub{grid-template-columns:110px 1fr;gap:14px;}
   .pub-thumb{width:110px;}
+  .proj{grid-template-columns:1fr;gap:14px;}
+  .proj-thumb{width:100%;}
 }
 </style>
 </head>
@@ -132,6 +150,7 @@ footer a{color:var(--muted);}
     <nav class="site-nav">
       <a href="#about">About</a>
       <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
       <a href="#awards">Awards</a>
     </nav>
   </div>
@@ -263,6 +282,30 @@ footer a{color:var(--muted);}
       </div>
     </section>
 
+    <section id="projects">
+      <h2 class="sec">Projects</h2>
+
+      <div class="proj">
+        <div class="proj-thumb">
+          <video src="media/visky.mp4" poster="media/visky_poster.jpg"
+                 muted loop playsinline preload="none"></video>
+        </div>
+        <div>
+          <p class="proj-title">VISKY: Mobile Robot for Autonomous Exploration in Unstructured Environments</p>
+          <p class="proj-funder">Agency for Defense Development (ADD) &middot; Challengeable Future Defense
+            Technology Research and Development Program</p>
+          <p class="proj-roles">
+            Planning Module Lead, learning-based planning <span class="yr">(2024 &ndash; Present)</span><br>
+            Path Tracking <span class="yr">(2022 &ndash; 2023)</span>
+          </p>
+          <p class="proj-desc">VISKY is a mobile robot developed for autonomous exploration in unknown,
+            unstructured, and hazardous environments. Built on robust perception, accurate SLAM, and
+            real-time replanning, I developed the path tracking module in the first phase and now lead
+            the learning-based planning module.</p>
+        </div>
+      </div>
+    </section>
+
     <section id="awards">
       <h2 class="sec">Awards &amp; Honors</h2>
       <div class="entry">
@@ -287,6 +330,19 @@ footer a{color:var(--muted);}
 <footer>
   &copy; 2026 E-In Son. Built with a static AcademicPages-style layout, hosted on GitHub Pages.
 </footer>
+
+<script>
+// Project videos: play on hover (desktop), tap to toggle (mobile).
+document.querySelectorAll('.proj-thumb').forEach(function (box) {
+  var v = box.querySelector('video');
+  if (!v) return;
+  var play = function () { v.play().catch(function () {}); };
+  var stop = function () { v.pause(); v.currentTime = 0; };
+  box.addEventListener('mouseenter', play);
+  box.addEventListener('mouseleave', stop);
+  box.addEventListener('click', function () { v.paused ? play() : stop(); });
+});
+</script>
 
 </body>
 </html>
