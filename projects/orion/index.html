@@ -196,17 +196,6 @@ footer a{color:var(--muted);}
   giving a diffusion navigation policy that acts far more consistently at ambiguous decision points
   such as multi-way intersections.</p>
 
-  <!-- ---------- Teaser ---------- -->
-  <div class="teaser" id="top-figure">
-    <img src="../../images/ORION_pipeline.png" alt="ORION two-stage pipeline">
-    <p class="caption"><b>ORION.</b> <b>Stage&nbsp;1:</b> the vision encoder is pretrained with an
-    <i>ordinal neural collapse</i> objective that arranges action classes from <i>Far Left</i> to
-    <i>Far Right</i> sequentially along a single ordinal axis
-    (<span style="white-space:nowrap">&#8466;<sub>ord</sub> + &#8466;<sub>orth</sub></span>) while suppressing
-    within-class variance (&#8466;<sub>CDNV</sub>). <b>Stage&nbsp;2:</b> the encoder is integrated with a
-    Transformer and a diffusion policy and fine-tuned end-to-end with the action loss.</p>
-  </div>
-
   <!-- ---------- Video ---------- -->
   <section id="video">
     <h2 class="sec">Video</h2>
@@ -221,6 +210,17 @@ footer a{color:var(--muted);}
     <p class="caption"><b>Presentation.</b> Overview of the ordinal neural collapse objective, the
     two-stage pipeline, and simulation and real-world navigation results.</p>
   </section>
+
+  <!-- ---------- Teaser ---------- -->
+  <div class="teaser" id="top-figure">
+    <img src="../../images/ORION_pipeline.png" alt="ORION two-stage pipeline">
+    <p class="caption"><b>ORION.</b> <b>Stage&nbsp;1:</b> the vision encoder is pretrained with an
+    <i>ordinal neural collapse</i> objective that arranges action classes from <i>Far Left</i> to
+    <i>Far Right</i> sequentially along a single ordinal axis
+    (<span style="white-space:nowrap">&#8466;<sub>ord</sub> + &#8466;<sub>orth</sub></span>) while suppressing
+    within-class variance (&#8466;<sub>CDNV</sub>). <b>Stage&nbsp;2:</b> the encoder is integrated with a
+    Transformer and a diffusion policy and fine-tuned end-to-end with the action loss.</p>
+  </div>
 
   <!-- ---------- Abstract ---------- -->
   <section>
